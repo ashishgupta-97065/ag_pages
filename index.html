@@ -32,7 +32,7 @@
   .strip{background:var(--emerald);color:var(--sand);padding:clamp(28px,4vw,46px) clamp(24px,5vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:24px}
   .strip .item .k{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(26px,3vw,40px);color:var(--gold);line-height:1}
   .strip .item .v{font-size:14px;opacity:.85;margin-top:.3em}
-  .nav{position:sticky;top:0;z-index:50;background:var(--emerald);padding:14px clamp(16px,5vw,40px);display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(243,234,216,.15)}
+  .nav{position:sticky;top:48px;z-index:50;background:var(--emerald);padding:14px clamp(16px,5vw,40px);display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(243,234,216,.15)}
   .nav::-webkit-scrollbar{display:none}
   .nav{scrollbar-width:none}
   .nav a{flex:0 0 auto;font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--sand);text-decoration:none;background:rgba(243,234,216,.1);border:1px solid rgba(243,234,216,.28);padding:.5em 1.05em;border-radius:50px;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
@@ -74,9 +74,119 @@
   footer{background:var(--ink);color:var(--sand);text-align:center;padding:44px 20px;font-size:13px;opacity:.9}
   footer em{font-family:'Fraunces',serif;font-style:italic;color:var(--gold)}
   .legend{font-size:13px;color:var(--moss);margin:-10px auto 30px;max-width:1180px;padding:0 clamp(20px,5vw,40px);text-align:center}
+  /* tabs */
+  .tabs{position:sticky;top:0;z-index:100;display:flex;background:var(--ink)}
+  .tabs button{flex:1;background:none;border:none;color:var(--sand);font-family:'Work Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:.03em;padding:14px 10px;cursor:pointer;opacity:.55;border-bottom:3px solid transparent;transition:opacity .2s,border-color .2s}
+  .tabs button.active{opacity:1;border-color:var(--gold);color:var(--gold)}
+  .panel{display:none}
+  .panel.active{display:block}
+  /* schedule */
+  .plan-hero{background:linear-gradient(135deg,var(--emerald),var(--ink));color:var(--sand);padding:clamp(28px,6vw,60px) clamp(20px,5vw,40px)}
+  .plan-hero .eyebrow{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:clamp(14px,2vw,18px);margin-bottom:.4em}
+  .plan-hero h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,8vw,72px);line-height:.95;letter-spacing:-.02em}
+  .plan-hero p{font-weight:300;margin-top:.8em;max-width:54ch;font-size:15px;opacity:.9}
+  .plan-wrap{max-width:900px;margin:0 auto;padding:clamp(22px,5vw,44px) clamp(14px,4vw,30px)}
+  .day{background:#fff;border:1px solid var(--sand-deep);border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:0 14px 34px -26px var(--shadow)}
+  .day-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:14px 16px;background:var(--emerald);color:var(--sand)}
+  .day-head .d{font-family:'Fraunces',serif;font-weight:600;font-size:19px}
+  .day-head .tag2{font-size:11px;background:rgba(243,234,216,.15);border:1px solid rgba(243,234,216,.32);padding:.25em .7em;border-radius:50px}
+  .day-head .tag2.lock{background:var(--gold);color:var(--emerald);border-color:var(--gold);font-weight:700}
+  .sched{width:100%;border-collapse:collapse}
+  .sched th{text-align:left;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--moss);padding:10px 12px 4px;font-weight:600}
+  .sched td{padding:10px 12px;border-top:1px solid var(--sand-deep);vertical-align:top;font-size:13.5px}
+  .sched td.per{font-weight:600;color:var(--emerald);white-space:nowrap;width:70px}
+  .sched td.rn{white-space:nowrap;width:46px}
+  .sched td.act{color:#34453d;line-height:1.45}
+  .rain{display:inline-block;font-size:11.5px;font-weight:700;padding:.15em .5em;border-radius:50px;min-width:24px;text-align:center}
+  .r0{background:#e4f1e9;color:#1d5c43}
+  .r1{background:#fbf0d8;color:#8a6d14}
+  .r2{background:#fbe0cf;color:#a8431c}
+  .r3{background:#f3c3b0;color:#8f2f10}
+  .act .mk{color:var(--coral);font-weight:700}
+  .act .opt{color:#7a8a80;font-style:italic}
+  .plan-note{background:linear-gradient(135deg,var(--moss),var(--emerald));color:var(--sand);border-radius:14px;padding:20px;font-size:13.5px;font-weight:300;line-height:1.55}
+  .plan-note b{color:var(--gold);font-weight:600}
+  .plan-note h3{font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:18px;margin-bottom:.5em}
 </style>
 </head>
 <body>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="plan">Our Plan</button>
+  <button class="tab-btn" data-tab="options">All Options</button>
+</div>
+
+<section class="panel active" id="plan">
+  <div class="plan-hero">
+    <p class="eyebrow">Tue 2 – Sat 6 June · travelling with parents</p>
+    <h1>Our Plan</h1>
+    <p>Built around the forecast. Rain hours per part of day (0 = dry → 3 = wet). Railay locked to the week's one dry window — Thursday afternoon. Beaches skipped; Railay + Ao Nang carry the coast.</p>
+  </div>
+  <div class="plan-wrap">
+
+    <div class="day">
+      <div class="day-head"><span class="d">Tue 2 Jun</span><span class="tag2">Arrival</span><span class="tag2">Evening only</span></div>
+      <table class="sched">
+        <tr><th>Period</th><th>Rain</th><th>Plan</th></tr>
+        <tr><td class="per">Morning</td><td class="rn"><span class="rain r1">1</span></td><td class="act">In transit / flying</td></tr>
+        <tr><td class="per">Afternoon</td><td class="rn"><span class="rain r1">½</span></td><td class="act">Arrive, check in ~4–5pm, rest</td></tr>
+        <tr><td class="per">Evening</td><td class="rn"><span class="rain r1">½</span></td><td class="act">Dinner — Ao Nang Landmark Night Market (covered, nightly)</td></tr>
+        <tr><td class="per">Night</td><td class="rn"><span class="rain r0">0</span></td><td class="act">Rest</td></tr>
+      </table>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="d">Wed 3 Jun</span><span class="tag2">Kayak day · north</span></div>
+      <table class="sched">
+        <tr><th>Period</th><th>Rain</th><th>Plan</th></tr>
+        <tr><td class="per">Morning</td><td class="rn"><span class="rain r0">½</span></td><td class="act"><span class="mk">Ao Thalane kayaking</span> — sheltered, drizzle-OK. Start ~8–9am</td></tr>
+        <tr><td class="per">Afternoon</td><td class="rn"><span class="rain r2">2</span></td><td class="act">Rain → back to base; rest <span class="opt">or Krabi Art Museum (indoor)</span></td></tr>
+        <tr><td class="per">Evening</td><td class="rn"><span class="rain r1">½</span></td><td class="act">Easy dinner / Ao Nang stroll</td></tr>
+        <tr><td class="per">Night</td><td class="rn"><span class="rain r0">0</span></td><td class="act">Rest</td></tr>
+      </table>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="d">Thu 4 Jun</span><span class="tag2 lock">Railay locked</span></div>
+      <table class="sched">
+        <tr><th>Period</th><th>Rain</th><th>Plan</th></tr>
+        <tr><td class="per">Morning</td><td class="rn"><span class="rain r2">2</span></td><td class="act">Showers → slow start <span class="opt">· optional Wat Kaew if it eases</span></td></tr>
+        <tr><td class="per">Afternoon</td><td class="rn"><span class="rain r0">0</span></td><td class="act"><span class="mk">RAILAY + Phra Nang</span> — boat ~12:30, back ~5:30. The dry window.</td></tr>
+        <tr><td class="per">Evening</td><td class="rn"><span class="rain r0">0</span></td><td class="act">Dinner Ao Nang</td></tr>
+        <tr><td class="per">Night</td><td class="rn"><span class="rain r0">0</span></td><td class="act">Rest</td></tr>
+      </table>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="d">Fri 5 Jun</span><span class="tag2">Rain-proof · wettest</span></div>
+      <table class="sched">
+        <tr><th>Period</th><th>Rain</th><th>Plan</th></tr>
+        <tr><td class="per">Morning</td><td class="rn"><span class="rain r2">1½</span></td><td class="act"><span class="mk">Hot Springs</span> — warm water, rain irrelevant (SE ~1hr)</td></tr>
+        <tr><td class="per">Afternoon</td><td class="rn"><span class="rain r2">2</span></td><td class="act">Emerald + Blue Pool (paved path) <span class="opt">or Art Museum if muddy</span></td></tr>
+        <tr><td class="per">Evening</td><td class="rn"><span class="rain r2">1½</span></td><td class="act"><span class="mk">Krabi Town Night Market</span> (Fri opens) + Wat Kaew</td></tr>
+        <tr><td class="per">Night</td><td class="rn"><span class="rain r1">1</span></td><td class="act">Rest</td></tr>
+      </table>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="d">Sat 6 Jun</span><span class="tag2">Half day</span><span class="tag2">Till ~12pm</span></div>
+      <table class="sched">
+        <tr><th>Period</th><th>Rain</th><th>Plan</th></tr>
+        <tr><td class="per">Morning</td><td class="rn"><span class="rain r2">1½</span></td><td class="act">Near base only: Wat Sai Thai (quick) / Ao Nang stroll, pack</td></tr>
+        <tr><td class="per">Afternoon</td><td class="rn"><span class="rain r1">—</span></td><td class="act">Checkout → airport</td></tr>
+      </table>
+    </div>
+
+    <div class="plan-note">
+      <h3>Bench — swap in if wanted</h3>
+      Khao Khanab Nam (river-karst boat) · Tiger Cave base (no climb) · Elephant Sanctuary (north, pairs with Wed kayak) · Koh Klang (culture island).<br><br>
+      <b>Anchors:</b> Wed AM kayak &amp; Thu PM Railay sit on the two driest windows. <b>Re-check 2 days out</b> — if Thu morning turns dry, kayak can move to Thu AM for a full water day.
+    </div>
+
+  </div>
+</section>
+
+<section class="panel" id="options">
 
 <header class="hero">
   <p class="eyebrow">A monsoon-smart shortlist · travelling with parents</p>
@@ -289,6 +399,20 @@
   <em>Krabi — the possible list.</em><br>
   25 candidate sites · June season · easy pace, travelling with parents
 </footer>
+
+</section>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.tab-btn').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      document.getElementById(b.dataset.tab).classList.add('active');
+      window.scrollTo(0,0);
+    });
+  });
+</script>
 
 </body>
 </html>
