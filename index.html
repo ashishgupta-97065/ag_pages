@@ -124,7 +124,9 @@
   .travel .mode.boat{background:var(--teal)}
   .travel .mode.walk{background:var(--coral)}
   .opt-label{display:flex;align-items:center;gap:8px;margin:4px 2px 12px;font-family:'Fraunces',serif;font-weight:600;color:var(--coral);font-size:16px}
-  .opt-label .pill{background:var(--coral);color:#fff;font-family:'Work Sans',sans-serif;font-size:11px;font-weight:700;padding:.2em .6em;border-radius:50px;letter-spacing:.03em}
+  .opt-label .pill{background:var(--coral);color:#fff;font-family:'Work Sans',sans-serif;font-size:11px;font-weight:700;padding:.25em .7em;border-radius:50px;letter-spacing:.03em;white-space:nowrap;display:inline-block}
+  .rain-key{font-size:11.5px;color:var(--moss);padding:12px 4px 2px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;border-bottom:1px solid var(--sand-deep);margin-bottom:6px}
+  .rain-key b{color:var(--emerald);font-weight:600;margin-right:2px}
   .opt-label.b{color:var(--moss)}
   .opt-label.b .pill{background:var(--moss)}
   .opt-divider{text-align:center;font-size:12px;color:var(--moss);margin:18px 0 16px;font-weight:700;letter-spacing:.08em}
@@ -141,7 +143,7 @@
   <div class="plan-hero">
     <p class="eyebrow">Tue 2 – Sat 6 June · travelling with parents</p>
     <h1>Our Plan</h1>
-    <p>The shortlist from All Options, sequenced into an itinerary and matched to the forecast. Each slot shows rain (0 = dry → 3 = wet) and the actual site card — tap any for photos &amp; directions. Railay sits on the week's one dry window: Thursday afternoon. Relaxed pace — every day starts ~10 AM after a proper breakfast.</p>
+    <p>The shortlist from All Options, sequenced into an itinerary and matched to the forecast. Each slot shows rain hours (see key) and the actual site card — tap any for photos &amp; directions. Railay sits on the week's one dry window: Thursday afternoon. Relaxed pace — every day starts ~10 AM after a proper breakfast.</p>
   </div>
   <div class="plan-wrap">
 
@@ -149,6 +151,7 @@
     <div class="day">
       <div class="day-head"><span class="d">Tue 2 Jun</span><span class="tag2">Arrival</span><span class="tag2">Evening only</span></div>
       <div class="day-body">
+        <div class="rain-key"><b>Rain hours:</b> <span class="rain r0">0</span> dry · <span class="rain r1">1</span> light · <span class="rain r2">2</span> wet · <span class="rain r3">3</span> heavy</div>
         <div class="line2"><span class="per3">Morning</span><span class="rain r1">1</span><span>In transit / flying</span></div>
         <div class="line2"><span class="per3">Afternoon</span><span class="rain r1">½</span><span>Arrive, check in ~4–5pm, rest</span></div>
         <div class="slot">
