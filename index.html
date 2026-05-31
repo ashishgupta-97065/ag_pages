@@ -32,6 +32,12 @@
   .strip{background:var(--emerald);color:var(--sand);padding:clamp(28px,4vw,46px) clamp(24px,5vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:24px}
   .strip .item .k{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(26px,3vw,40px);color:var(--gold);line-height:1}
   .strip .item .v{font-size:14px;opacity:.85;margin-top:.3em}
+  .nav{position:sticky;top:0;z-index:50;background:var(--emerald);padding:14px clamp(16px,5vw,40px);display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-bottom:1px solid rgba(243,234,216,.15)}
+  .nav::-webkit-scrollbar{display:none}
+  .nav{scrollbar-width:none}
+  .nav a{flex:0 0 auto;font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--sand);text-decoration:none;background:rgba(243,234,216,.1);border:1px solid rgba(243,234,216,.28);padding:.5em 1.05em;border-radius:50px;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+  .nav a:hover,.nav a:active{background:var(--gold);color:var(--emerald);border-color:var(--gold)}
+  .sec-head h2{scroll-margin-top:74px}
   .wrap{max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,84px) clamp(20px,5vw,40px)}
   .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:30px;flex-wrap:wrap}
   .sec-head .num{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(28px,4vw,52px);color:var(--coral);font-weight:500}
@@ -83,16 +89,18 @@
   </div>
 </header>
 
-<section class="strip">
-  <div class="item"><div class="k">25</div><div class="v">candidate sites</div></div>
-  <div class="item"><div class="k">Jun</div><div class="v">wet season — rain in bursts</div></div>
-  <div class="item"><div class="k">24–32°C</div><div class="v">warm throughout</div></div>
-  <div class="item"><div class="k">Ao Nang</div><div class="v">best base</div></div>
-</section>
+<nav class="nav">
+  <a href="#islands">Islands &amp; boats</a>
+  <a href="#beaches">Drive-up beaches</a>
+  <a href="#springs">Jungle springs</a>
+  <a href="#nature">Nature &amp; experiences</a>
+  <a href="#temples">Temples &amp; town</a>
+  <a href="#adventurous">Adventurous</a>
+</nav>
 
 <!-- 01 ISLANDS -->
 <div class="wrap">
-  <div class="sec-head"><span class="num">01</span><h2>Islands &amp; gentle boats</h2><p class="note">Front-load on calm mornings. Private longtails beat crowded speedboats for parents.</p></div>
+  <div class="sec-head"><span class="num">01</span><h2 id="islands">Islands &amp; gentle boats</h2><p class="note">Front-load on calm mornings. Private longtails beat crowded speedboats for parents.</p></div>
   <div class="grid">
 
     <article class="card"><div class="ph"><img loading="lazy" src="https://lh3.googleusercontent.com/place-photos/AJRVUZM16bYAXox1dPa6wcPnzl7oSlTKhnWySs4mWEUdiOQs4NUQZJcQoAqVVwiUhpZA3axdnxgO47eQWGobnr-Ac3u3vuOSUnHmOHG02GBrd3RFte2klCUD2o6qFykuEoHrn3Dn75Bh4RAyh1lUS5I=s4800-w800-h600" alt="Hong Island"><span class="rate">★ <b>4.6</b> · 512</span></div>
@@ -125,7 +133,7 @@
 
 <!-- 02 BEACHES -->
 <div class="wrap" style="padding-top:0">
-  <div class="sec-head"><span class="num">02</span><h2>Drive-up beaches</h2><p class="note">No boats, no schedules — where a rental car earns its keep. Chase the post-rain clear window.</p></div>
+  <div class="sec-head"><span class="num">02</span><h2 id="beaches">Drive-up beaches</h2><p class="note">No boats, no schedules — where a rental car earns its keep. Chase the post-rain clear window.</p></div>
   <div class="grid">
 
     <article class="card"><div class="ph"><img loading="lazy" src="https://lh3.googleusercontent.com/place-photos/AJRVUZMgkYL5UJYyqi5Y24ZAjkIB5UXrj2x9E8Ei1i-G6_3edsIpQmXDc4wefVFbhsMb3QdgTr03tcQxSulPpLi4KE_Dw4j7iFaIUMdTxCpjUraY6H-s6DWLHPq_X3qNyUeiqTwpEng6A4OciazWHg=s4800-w800-h600" alt="Nopparat Thara"><span class="rate">★ <b>4.5</b> · 814</span></div>
@@ -165,7 +173,7 @@
 
 <!-- 03 SPRINGS -->
 <div class="wrap">
-  <div class="sec-head"><span class="num">03</span><h2>Jungle springs</h2><p class="note">~1 hr inland, best combined in one trip. Lush in the rains — ideal rainy-day plan.</p></div>
+  <div class="sec-head"><span class="num">03</span><h2 id="springs">Jungle springs</h2><p class="note">~1 hr inland, best combined in one trip. Lush in the rains — ideal rainy-day plan.</p></div>
   <div class="grid">
 
     <article class="card"><div class="ph"><img loading="lazy" src="https://lh3.googleusercontent.com/place-photos/AJRVUZOShoAv7816PewGk7uv9creNGsReTkdGiHTCNJz7ONUF0zpjPL_QLoJUH2Wxb3CbgQU7XlD9ZuGqlHRNdTHpTIr3SLBQJZBErbXJCBvJSO4d_rXYYDHz25B7LZny49dk6Zmvvh3OYI6R1ubUA=s4800-w800-h600" alt="Saline Hot Spring"><span class="rate">★ <b>4.3</b> · 1,397</span></div>
@@ -188,7 +196,7 @@
 
 <!-- 04 NATURE & EXPERIENCES -->
 <div class="wrap" style="padding-top:0">
-  <div class="sec-head"><span class="num">04</span><h2>Nature &amp; experiences</h2><p class="note">Gentle, hands-on, scenic. Good for slow days and curious parents.</p></div>
+  <div class="sec-head"><span class="num">04</span><h2 id="nature">Nature &amp; experiences</h2><p class="note">Gentle, hands-on, scenic. Good for slow days and curious parents.</p></div>
   <div class="grid">
 
     <article class="card"><div class="ph"><img loading="lazy" src="https://lh3.googleusercontent.com/place-photos/AJRVUZOZM5OzKoyZGOIlqNwyvJURbSBpgRbthgPM2DboKxjRZXG63h68fcKLu4X02NqFew0HVTQc9RO-QbC6noC50upiIQQCuYZJ3iN8xnGj2PM_xZpgcWI66tFVW673bI9aCkfbNN9vx9KOKPrF8Q0=s4800-w800-h600" alt="Ao Thalane Kayaking"><span class="rate">★ <b>4.6</b> · 540</span></div>
@@ -216,7 +224,7 @@
 
 <!-- 05 TEMPLES, TOWN, CURIOS -->
 <div class="wrap" style="padding-top:0">
-  <div class="sec-head"><span class="num">05</span><h2>Temples, town &amp; curios</h2><p class="note">Culture, food and oddities — mostly rain-proof. Great gap-fillers.</p></div>
+  <div class="sec-head"><span class="num">05</span><h2 id="temples">Temples, town &amp; curios</h2><p class="note">Culture, food and oddities — mostly rain-proof. Great gap-fillers.</p></div>
   <div class="grid">
 
     <article class="card"><div class="ph"><img loading="lazy" src="https://lh3.googleusercontent.com/place-photos/AJRVUZO0LEuqDXqlxgH6-OGH-0n3MvvWxGlv980UfDRN5e5uxfw2X34RObT6o_DF1eYO852CqIkclEudVnvRKKyViQZkeolSXGOKPU-wuiSkhgFICbrr4Mqni6UDDHa_CoJQB61aBf0Sf1wt6aEk_hpcTACMTw=s4800-w800-h600" alt="Tiger Cave Temple"><span class="rate">★ <b>4.6</b> · 13,629</span></div>
@@ -259,7 +267,7 @@
 
 <!-- 06 ADVENTUROUS / SKIP -->
 <div class="wrap" style="padding-top:0">
-  <div class="sec-head"><span class="num">06</span><h2>Big-ticket &amp; adventurous</h2><p class="note">On the list for completeness — but flagged: tough for parents or rough in monsoon.</p></div>
+  <div class="sec-head"><span class="num">06</span><h2 id="adventurous">Big-ticket &amp; adventurous</h2><p class="note">On the list for completeness — but flagged: tough for parents or rough in monsoon.</p></div>
   <div class="grid">
 
     <article class="card skip"><div class="ph"><img loading="lazy" src="https://lh3.googleusercontent.com/place-photos/AJRVUZNZ_hWwkiCME2Iqs2efrGbRCjdCkAqwbdd1hcQfeg0NNV08xshGj2B6U2tSO9A-VSwZRRtImlPDc2YeMqR7g9y2hAsYgcjrGTNOcEaKlY_UwXvlKMGG240JtNVpenAWZkMlxtXTJlINvroaYmdAJQOB4Q=s4800-w800-h600" alt="Maya Bay"><span class="rate">★ <b>4.7</b> · 12,301</span></div>
