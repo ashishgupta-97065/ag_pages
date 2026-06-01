@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root{
     --ink:#10261d;--emerald:#0e3a2b;--moss:#1d5c43;--teal:#2a9d8f;
@@ -119,6 +121,14 @@
   .line2 .per3{font-family:'Fraunces',serif;font-weight:600;color:var(--moss);font-size:14px;min-width:74px}
   #plan .grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
   .dep{font-size:11.5px;font-weight:600;color:var(--emerald);background:var(--sand);border:1px solid var(--sand-deep);padding:.2em .6em;border-radius:50px;white-space:nowrap}
+  .map-wrap{max-width:900px;margin:0 auto;padding:clamp(20px,4vw,32px) clamp(14px,4vw,30px) 0}
+  #planmap{height:380px;width:100%;border-radius:16px;border:1px solid var(--sand-deep);box-shadow:0 14px 34px -26px var(--shadow);z-index:0}
+  .map-legend{display:flex;flex-wrap:wrap;gap:9px 15px;margin:12px 2px 0;font-size:12px;color:var(--moss)}
+  .map-legend span{display:inline-flex;align-items:center;gap:5px}
+  .map-legend i{width:12px;height:12px;border-radius:50%;display:inline-block;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+  .leaflet-popup-content{font-family:'Work Sans',sans-serif;font-size:13px;line-height:1.4}
+  .leaflet-popup-content b{font-family:'Fraunces',serif}
+  .leaflet-popup-content a{color:var(--coral);font-weight:600;text-decoration:none}
   .travel{font-size:12px;color:var(--moss);background:#f0ebde;border-radius:9px;padding:8px 11px;margin:0 2px 12px;line-height:1.5}
   .travel b{color:var(--emerald);font-weight:600}
   .travel .mode{display:inline-block;background:var(--emerald);color:var(--sand);font-size:10px;font-weight:600;padding:.18em .6em;border-radius:50px;text-transform:uppercase;letter-spacing:.04em;margin-right:4px}
@@ -145,6 +155,17 @@
     <p class="eyebrow">Tue 2 – Sat 6 June · travelling with parents</p>
     <h1>Our Plan</h1>
     <p>The shortlist from All Options, sequenced into an itinerary and matched to the forecast. Each slot shows rain hours (see key) and the actual site card — tap any for photos &amp; directions. Railay sits on the week's one dry window: Thursday afternoon. Relaxed pace — every day starts ~10 AM after a proper breakfast.</p>
+  </div>
+  <div class="map-wrap">
+    <div id="planmap"></div>
+    <div class="map-legend">
+      <span><i style="background:#10261d"></i> Hotel</span>
+      <span><i style="background:#e0703c"></i> Tue · market</span>
+      <span><i style="background:#2a9d8f"></i> Wed · Khao Sok</span>
+      <span><i style="background:#2f6fb0"></i> Thu · Railay</span>
+      <span><i style="background:#c89b3c"></i> Fri · temples + springs</span>
+      <span><i style="background:#1d5c43"></i> Sat · beach</span>
+    </div>
   </div>
   <div class="plan-wrap">
 
@@ -560,8 +581,46 @@
       b.classList.add('active');
       document.getElementById(b.dataset.tab).classList.add('active');
       window.scrollTo(0,0);
+      if(b.dataset.tab==='plan'&&window._planmap){setTimeout(function(){window._planmap.invalidateSize();},120);}
     });
   });
+</script>
+<script>
+(function(){
+  function initMap(){
+    if(typeof L==='undefined'){return setTimeout(initMap,200);}
+    var pts=[
+      {n:"Aonang Villa Resort (hotel)",d:"hotel",c:"#10261d",r:11,la:8.0309516,lo:98.8235522,u:""},
+      {n:"Ao Nang Landmark Night Market",d:"Tue",c:"#e0703c",la:8.0425716,lo:98.8115002,u:"https://maps.google.com/?cid=2367171220277435299"},
+      {n:"Cheow Lan Pier",d:"Wed",c:"#2a9d8f",la:8.9771424,lo:98.8203759,u:"https://maps.google.com/?cid=15620018731307423850"},
+      {n:"Rajjaprabha Dam",d:"Wed",c:"#2a9d8f",la:8.9737598,lo:98.8104521,u:"https://maps.google.com/?cid=15355973026372138586"},
+      {n:"Cheow Lan Lake View Point",d:"Wed",c:"#2a9d8f",la:8.9737823,lo:98.8104293,u:"https://maps.google.com/?cid=2984788415442928506"},
+      {n:"Khao Sam Kloe (Three Sisters)",d:"Wed",c:"#2a9d8f",la:8.9968125,lo:98.7091875,u:"https://maps.google.com/?cid=6074450081501671467"},
+      {n:"Nang Prai Raft House",d:"Wed",c:"#2a9d8f",la:9.0071875,lo:98.6960625,u:"https://maps.google.com/?cid=6535920730363419083"},
+      {n:"Wat Sai Thai",d:"Thu",c:"#2f6fb0",la:8.0819515,lo:98.8688087,u:"https://maps.google.com/?cid=3833752786841984536"},
+      {n:"Railay Beach",d:"Thu",c:"#2f6fb0",la:8.011711,lo:98.837776,u:"https://maps.google.com/?cid=7050538811056541825"},
+      {n:"Phra Nang Cave Beach",d:"Thu",c:"#2f6fb0",la:8.0059287,lo:98.8374807,u:"https://maps.google.com/?cid=914642424599100276"},
+      {n:"Wat Kaew Korawaram",d:"Fri",c:"#c89b3c",la:8.0632606,lo:98.9141363,u:"https://maps.google.com/?cid=4145200940836364642"},
+      {n:"Saline Hot Spring",d:"Fri",c:"#c89b3c",la:7.9046061,lo:99.1084065,u:"https://maps.google.com/?cid=8894101973678920376"},
+      {n:"Emerald Pool",d:"Fri",c:"#c89b3c",la:7.9250768,lo:99.2681506,u:"https://maps.google.com/?cid=12510852535467263470"},
+      {n:"Blue Pool",d:"Fri",c:"#c89b3c",la:7.9281149,lo:99.2723047,u:"https://maps.google.com/?cid=5263673766904411165"},
+      {n:"Tiger Cave Temple",d:"Fri",c:"#c89b3c",la:8.1239259,lo:98.925131,u:"https://maps.google.com/?cid=6104414347015522321"},
+      {n:"Krabi Town Night Market",d:"Fri",c:"#c89b3c",la:8.0640527,lo:98.9162537,u:"https://maps.google.com/?cid=2632850343432695160"},
+      {n:"Ao Nang Beach",d:"Sat",c:"#1d5c43",la:8.0292052,lo:98.8240353,u:"https://maps.google.com/?cid=6695985676428659021"}
+    ];
+    var map=L.map('planmap',{scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
+    var grp=[];
+    pts.forEach(function(p){
+      var m=L.circleMarker([p.la,p.lo],{radius:p.r||7,fillColor:p.c,color:'#fff',weight:2,fillOpacity:1});
+      var pop='<b>'+p.n+'</b>'+(p.d!=='hotel'?'<br>'+p.d:'')+(p.u?'<br><a href="'+p.u+'" target="_blank">Directions &rsaquo;</a>':'');
+      m.bindPopup(pop); m.addTo(map); grp.push([p.la,p.lo]);
+    });
+    map.fitBounds(grp,{padding:[30,30]});
+    window._planmap=map;
+  }
+  if(document.readyState!=='loading'){initMap();}else{document.addEventListener('DOMContentLoaded',initMap);}
+})();
 </script>
 
 </body>
